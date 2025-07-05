@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fathir Mahib - Portofolio</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --accent-color: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        /* Header dengan foto profil */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .profile-name {
+            flex: 1;
+        }
+        
+        h1 {
+            color: var(--dark-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .profile-title {
+            color: var(--secondary-color);
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .tabs li {
+            padding: 12px 25px;
+            cursor: pointer;
+            background-color: rgba(255,255,255,0.7);
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--dark-color);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-bottom: none;
+        }
+        
+        .tabs li:hover {
+            background-color: rgba(255,255,255,0.9);
+            transform: translateY(-2px);
+        }
+        
+        .tabs li.active {
+            background-color: white;
+            color: var(--primary-color);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid white;
+            margin-bottom: -1px;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 25px;
+            background-color: white;
+            border-radius: 0 5px 5px 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 70%;
+            width: 5px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+            margin: 30px 0;
+        }
+        
+        /* Gallery Styles */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .gallery-caption {
+            position: relative;
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px 5px 0 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .gallery-item img {
+            border-radius: 0 0 5px 5px;
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Hobbies List */
+        .hobbies-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .hobby-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: calc(50% - 15px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .hobby-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .hobby-card h3 {
+            margin-top: 0;
+            color: var(--dark-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .hobby-card h3::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        /* FAQ Styles */
+        .faq-item {
+            margin-bottom: 20px;
+            background-color: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            color: var(--dark-color);
+            font-size: 1.1em;
+        }
+        
+        .faq-answer {
+            margin-top: 10px;
+            padding-left: 10px;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        /* Elegant Note */
+        .note {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dengan foto profil -->
+    <div class="profile-header">
+        <img src="images/me.jpg" alt="Foto Profil Fathir Mahib" class="profile-picture">
+        <div class="profile-name">
+            <h1>Fathir Mahib</h1>
+            <div class="profile-title">Mahasiswa Informatika</div>
+        </div>
+    </div>
+    
+    <ul class="tabs">
+        <li class="active" onclick="openTab('profile')">Profil</li>
+        <li onclick="openTab('hobbies')">Hobi</li>
+        <li onclick="openTab('gallery')">Galeri</li>
+        <li onclick="openTab('faq')">FAQ</li>
+    </ul>
+    
+    <!-- Profile Tab -->
+    <div id="profile" class="tab-content active">
+        <h2>Riwayat sekolah</h2>
+        <ul>
+            <li><strong>2023:</strong> Lulus SMA</li>
+            <li><strong>2024:</strong> Study in UAD</li>
+        </ul>
+        
+        <hr>
+        
+        <h2>Prestasi</h2>
+        <ul>
+            <li>Coming Soon</li>
+        </ul>
+    </div>
+    
+    <!-- Hobbies Tab -->
+    <div id="hobbies" class="tab-content">
+        <h2>Hobi Saya</h2>
+        <div class="hobbies-list">
+            <div class="hobby-card">
+                <h3>Traveling</h3>
+                <p>Saya suka menjelajahi tempat baru untuk mendapatkan pengalaman dan wawasan yang berbeda.</p>
+            </div>
+            <div class="hobby-card">
+                <h3>Pemrograman</h3>
+                <p>Masih butuh banyak belajar.</p>
+            </div>
+            <div class="hobby-card">
+                <h3>Olahraga</h3>
+                <p>Sangat senang sekali dengan yang namanya olahraga, lari, main bola, main voli.</p>
+            </div>
+            <div class="hobby-card">
+                <h3>Hiking</h3>
+                <p>Sangat senang sekali bisa mengexplore alam, terkhususnya gunung.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Gallery Tab -->
+    <div id="gallery" class="tab-content">
+        <h2>Galeri Foto</h2>
+        <p>Beberapa momen favorit saya:</p>
+        
+        <div class="gallery">
+            <div class="gallery-item">
+                <div class="gallery-caption">Pantai</div>
+                <img src="images/Pantai.jpg" alt="Liburan di Pantai">
+            </div>
+            
+            <div class="gallery-item">
+                <div class="gallery-caption">Pendakian pertama</div>
+                <img src="images/pendakian_pertama.jpg" alt="Pendakian pertama">
+            </div>
+            
+            <div class="gallery-item">
+                <div class="gallery-caption">FAmily</div>
+                <img src="images/Family.jpg" alt="Family">
+            </div>
+            
+            <div class="gallery-item">
+                <div class="gallery-caption">Informatika23</div>
+                <img src="images/informatics23.jpg" alt="Informatics23">
+            </div>
+            
+            <div class="gallery-item">
+                <div class="gallery-caption">Ninja Gunung</div>
+                <img src="images/Ninja gunung.jpg" alt="Ninja Gunung">
+            </div>
+            
+            <div class="gallery-item">
+                <div class="gallery-caption">Running</div>
+                <img src="images/Run.jpg" alt="Running">
+            </div>
+        </div>
+        
+        <p class="note">Koleksi foto pribadi saya yang berkesan.</p>
+    </div>
+    
+    <!-- FAQ Tab -->
+    <div id="faq" class="tab-content">
+        <h2>Pertanyaan Umum</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">Kenapa suka traveling?</div>
+            <div class="faq-answer">Karena itu cara saya recharge energi dan buka wawasan baru.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Target ke depan?</div>
+            <div class="faq-answer">Pengen jadi lebih baik lagi dengan cara sendiri.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Apa motivasi belajar pemrograman?</div>
+            <div class="faq-answer">Saya tertarik dengan kemampuan untuk menciptakan solusi digital.</div>
+        </div>
+    </div>
+    
+    <script>
+        function openTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // Remove active class from all tabs
+            const tabs = document.getElementsByClassName('tabs')[0].getElementsByTagName('li');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            // Show the selected tab content and mark tab as active
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
